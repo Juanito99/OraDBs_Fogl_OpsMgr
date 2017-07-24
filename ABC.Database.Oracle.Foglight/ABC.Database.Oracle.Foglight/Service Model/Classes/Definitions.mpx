@@ -1,0 +1,250 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.MonitoringServer" Accessibility="Public" Abstract="false" Base="Windows!Microsoft.Windows.ComputerRole" Hosted="true" Singleton="false" Extension="false" />
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Base" Accessibility="Public" Abstract="true" Base="System!System.LogicalEntity" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="longName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="dbName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Database" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Server" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Listener" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Tablespace" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="tableSpaceName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="status" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="contents" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="blocksize" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="retention" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Agent" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="agentVersion" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="agentName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="build" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="monitoringHost" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="type" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+
+      </ClassTypes>
+
+      <RelationshipTypes>
+
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Server" />
+        </RelationshipType>
+
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Database" />
+        </RelationshipType>
+
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Listener" />
+        </RelationshipType>
+
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Agent" />
+        </RelationshipType>
+
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseHostsTablespace" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Database" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Tablespace" />
+        </RelationshipType>
+
+
+      </RelationshipTypes>
+
+    </EntityTypes>
+  </TypeDefinitions>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.MonitoringServer">
+          <Name>ABC Database Oracle Foglight MonitoringServer</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base">
+          <Name>ABC Database Oracle Foglight Base</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base" SubElementID="dbName">
+          <Name>dbName</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base" SubElementID="longName">
+          <Name>longName</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem">
+          <Name>ABC Database Oracle Foglight DatabaseSystem</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Database">
+          <Name>ABC Database Oracle Foglight Database</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Database" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Server">
+          <Name>ABC Database Oracle Foglight Server</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Server" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Listener">
+          <Name>ABC Database Oracle Foglight Listener</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Listener" SubElementID="uniqueId">
+          <Name>unqiueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace">
+          <Name>ABC Datatabase Oracle Foglight Tablespace</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="blocksize">
+          <Name>blocksize</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="contents">
+          <Name>contents</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="retention">
+          <Name>retention</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="status">
+          <Name>status</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="tableSpaceName">
+          <Name>tableSpaceName</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent">
+          <Name>ABC Datatabase Oracle Foglight Agent</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="agentVersion">
+          <Name>agentVersion</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="build">
+          <Name>build</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="monitoringHost">
+          <Name>monitoringHost</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="type">
+          <Name>type</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="agentName">
+          <Name>agentName</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsListener</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsServer</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsAgent</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseHostsTablespace">
+          <Name>ABC Database Oracle Foglight DatabaseHostsTablespace</Name>
+          <Description></Description>
+        </DisplayString>
+
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsDatabase</Name>
+          <Description></Description>
+        </DisplayString>
+
+
+      </DisplayStrings>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPackFragment>

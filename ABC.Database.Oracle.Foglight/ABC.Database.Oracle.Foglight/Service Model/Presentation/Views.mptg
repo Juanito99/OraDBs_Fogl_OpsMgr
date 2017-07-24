@@ -1,0 +1,95 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instancee54516c4027247eb8b415abbd66cf1af" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.MonitoringServer</Id>
+        <DisplayName>MonitoringServer</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.MonitoringServer</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance15c1c4a581904910814ac714be143b7f" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO.Tablespace</Id>
+        <DisplayName>DBO Tablespace</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Tablespace</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instancea54ba204ed904e3b88c94db14dd1ebbe" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO.Server</Id>
+        <DisplayName>DBO Server</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Server</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instanceacf3609b612c495f85584e18f1ed63e3" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO.Listener</Id>
+        <DisplayName>DBO Listener</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Listener</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance70d282be946f434d99ed97022b331fd0" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO.Database</Id>
+        <DisplayName>DBO Database</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Database</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance0f33355f5c54471e9c5f981ce566599b" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO.Agent</Id>
+        <DisplayName>DBO Agent</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Agent</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+    <Instance ID="Instance490bd9d32645477c86e6dbf0d413dfbf" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.CustomView" Version="1.0.0.0">
+      <CustomViewConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <ViewFolder>ABC.Database.Oracle.Foglight.Folder</ViewFolder>
+        <ViewType>SC!Microsoft.SystemCenter.StateViewType</ViewType>
+        <Visible>true</Visible>
+        <Accessibility>Internal</Accessibility>
+        <Id>View.State.DBO..DatabaseSystem</Id>
+        <DisplayName>DBO Database System</DisplayName>
+        <Description>Description for the new view</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Category>Operations</Category>
+      </CustomViewConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

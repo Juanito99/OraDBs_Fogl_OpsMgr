@@ -1,0 +1,302 @@
+<TemplateGroup>
+  <Instances>
+    <Instance ID="Instance05fb9e7779364de7a31bc163590e4edd" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>ABC.Database.Foglight.AggTestAdv.MonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;qryItem&gt;Tablespace&lt;/qryItem&gt;&lt;xmlShare&gt;\\server\FoglightMonitoring&lt;/xmlShare&gt;&lt;uniqueId&gt;$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Tablespace"]/uniqueId$&lt;/uniqueId&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Tablespace</Id>
+        <DisplayName>Tablespace Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Tablespace</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Agent Alert</AlertName>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instancef1f62337d39e4803bed64a97e42c08d1" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>ABC.Database.Foglight.AggTestAdv.MonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;qryItem&gt;Servers&lt;/qryItem&gt;&lt;xmlShare&gt;\\server\FoglightMonitoring&lt;/xmlShare&gt;&lt;uniqueId&gt;$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Server"]/uniqueId$&lt;/uniqueId&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Server</Id>
+        <DisplayName>Server Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Server</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Agent Alert</AlertName>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance69c531bac243420397501aeecda532c1" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <MonitorType>ABC.Database.Foglight.AggTestAdv.MonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;qryItem&gt;Listener&lt;/qryItem&gt;&lt;xmlShare&gt;\\server\FoglightMonitoring&lt;/xmlShare&gt;&lt;uniqueId&gt;$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Listener"]/uniqueId$&lt;/uniqueId&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Listener</Id>
+        <DisplayName>Listener Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Listener</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Agent Alert</AlertName>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance130a7d756bfe4cf6ab56de9f5fe3049e" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>ABC.Database.Foglight.AggTestAdv.MonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;qryItem&gt;Database&lt;/qryItem&gt;&lt;xmlShare&gt;\\server\FoglightMonitoring&lt;/xmlShare&gt;&lt;uniqueId&gt;$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Database"]/uniqueId$&lt;/uniqueId&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Database</Id>
+        <DisplayName>Database Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Database</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance3c3b4017c6e4407581b299c6759ee131" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.UnitMonitor" Version="1.0.0.0">
+      <UnitMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <MonitorType>ABC.Database.Foglight.AggTestAdv.MonitorType</MonitorType>
+        <MonitorConfig>&lt;IntervalSeconds&gt;300&lt;/IntervalSeconds&gt;&lt;SyncTime /&gt;&lt;qryItem&gt;Agent&lt;/qryItem&gt;&lt;xmlShare&gt;\\server\FoglightMonitoring&lt;/xmlShare&gt;&lt;uniqueId&gt;$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Agent"]/uniqueId$&lt;/uniqueId&gt;</MonitorConfig>
+        <MonitorOperationalStates>
+          <OperationalState>
+            <OperationalStateId>Success</OperationalStateId>
+            <OperationalStateDisplayName>Success</OperationalStateDisplayName>
+            <MonitorTypeStateId>Success</MonitorTypeStateId>
+            <HealthState>Success</HealthState>
+          </OperationalState>
+          <OperationalState>
+            <OperationalStateId>Failure</OperationalStateId>
+            <OperationalStateDisplayName>Failure</OperationalStateDisplayName>
+            <MonitorTypeStateId>Failure</MonitorTypeStateId>
+            <HealthState>Error</HealthState>
+          </OperationalState>
+        </MonitorOperationalStates>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Agent</Id>
+        <DisplayName>Agent Monitor</DisplayName>
+        <Description>Description for the new unit monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.Agent</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+        <AlertName>Agent Alert</AlertName>
+        <ConfirmDelivery>false</ConfirmDelivery>
+      </UnitMonitorConfig>
+    </Instance>
+    <Instance ID="Instance0c4759afac5f4091968d8de0190b1713" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.AggregateMonitor" Version="1.0.0.0">
+      <AggregateMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>WorstOf</Algorithm>
+        <ParentMonitor>Health!System.Health.AvailabilityState</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Ag.DatabaseSystem</Id>
+        <DisplayName>Monitor.Ag.DatabaseSystem</DisplayName>
+        <Description>Description for new aggregate monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </AggregateMonitorConfig>
+    </Instance>
+    <Instance ID="Instance7fc5b3c29e4b459ca55b9b97416aeb17" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.DependencyMonitor" Version="1.0.0.0">
+      <DependencyMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>
+          <Algorithm>WorstOf</Algorithm>
+        </Algorithm>
+        <MemberMonitor>Health!System.Health.AvailabilityState</MemberMonitor>
+        <MemberInMaintenance>Ignore</MemberInMaintenance>
+        <MemberUnavailable>Ignore</MemberUnavailable>
+        <RelationshipType>ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer</RelationshipType>
+        <ParentMonitor>ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Dep.DatabaseSystemOnServer</Id>
+        <DisplayName>DatabaseSystemDependsOnServer</DisplayName>
+        <Description>Description for new dependency monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </DependencyMonitorConfig>
+    </Instance>
+    <Instance ID="Instance221140480ef84151b8ae62a06c599826" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.DependencyMonitor" Version="1.0.0.0">
+      <DependencyMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>
+          <Algorithm>WorstOf</Algorithm>
+        </Algorithm>
+        <MemberMonitor>Health!System.Health.AvailabilityState</MemberMonitor>
+        <MemberInMaintenance>Ignore</MemberInMaintenance>
+        <MemberUnavailable>Ignore</MemberUnavailable>
+        <RelationshipType>ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener</RelationshipType>
+        <ParentMonitor>ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Dep.DatabaseSystemOnListener</Id>
+        <DisplayName>DatabaseSystemDependsOnListener</DisplayName>
+        <Description>Description for new dependency monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </DependencyMonitorConfig>
+    </Instance>
+    <Instance ID="Instance8035a7af8cca4bf7872bd8b28062ba30" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.DependencyMonitor" Version="1.0.0.0">
+      <DependencyMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>
+          <Algorithm>WorstOf</Algorithm>
+        </Algorithm>
+        <MemberMonitor>Health!System.Health.AvailabilityState</MemberMonitor>
+        <MemberInMaintenance>Ignore</MemberInMaintenance>
+        <MemberUnavailable>Ignore</MemberUnavailable>
+        <RelationshipType>ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase</RelationshipType>
+        <ParentMonitor>ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Dep.DatabaseSystemOnDatabase</Id>
+        <DisplayName>DatabaseSystemDependsOnDatabase</DisplayName>
+        <Description>Description for new dependency monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </DependencyMonitorConfig>
+    </Instance>
+    <Instance ID="Instancee60a471027524c098254f99e71ff4e13" Type="Microsoft.SystemCenter.Authoring.CodeGeneration.Monitoring.DependencyMonitor" Version="1.0.0.0">
+      <DependencyMonitorConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <Algorithm>
+          <Algorithm>WorstOf</Algorithm>
+        </Algorithm>
+        <MemberMonitor>Health!System.Health.AvailabilityState</MemberMonitor>
+        <MemberInMaintenance>Ignore</MemberInMaintenance>
+        <MemberUnavailable>Ignore</MemberUnavailable>
+        <RelationshipType>ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent</RelationshipType>
+        <ParentMonitor>ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem</ParentMonitor>
+        <Accessibility>Internal</Accessibility>
+        <Id>Monitor.Dep.DatabaseSystemOnAgent</Id>
+        <DisplayName>DatabaseSystemDependsOnAgent</DisplayName>
+        <Description>Description for new dependency monitor.</Description>
+        <Target>ABC.Database.Oracle.Foglight.DBO.DatabaseSystem</Target>
+        <Enabled>true</Enabled>
+        <Category>AvailabilityHealth</Category>
+        <Remotable>true</Remotable>
+        <Priority>Normal</Priority>
+        <AlertAutoResolve>true</AlertAutoResolve>
+        <AlertOnState>None</AlertOnState>
+        <AlertPriority>Normal</AlertPriority>
+        <AlertSeverity>MatchMonitorHealth</AlertSeverity>
+      </DependencyMonitorConfig>
+    </Instance>
+  </Instances>
+</TemplateGroup>

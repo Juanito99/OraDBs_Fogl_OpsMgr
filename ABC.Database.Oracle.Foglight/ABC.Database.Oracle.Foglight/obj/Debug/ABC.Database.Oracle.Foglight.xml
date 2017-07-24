@@ -1,0 +1,2643 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ManagementPack SchemaVersion="2.0" ContentReadable="true" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Manifest>
+    <Identity>
+      <ID>ABC.Database.Oracle.Foglight</ID>
+      <Version>1.0.0.6</Version>
+    </Identity>
+    <Name>ABC.Database.Oracle.Foglight</Name>
+    <References>
+      <Reference Alias="SC">
+        <ID>Microsoft.SystemCenter.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Windows">
+        <ID>Microsoft.Windows.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="Health">
+        <ID>System.Health.Library</ID>
+        <Version>7.0.8433.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+      <Reference Alias="System">
+        <ID>System.Library</ID>
+        <Version>7.5.8501.0</Version>
+        <PublicKeyToken>31bf3856ad364e35</PublicKeyToken>
+      </Reference>
+    </References>
+  </Manifest>
+  <TypeDefinitions>
+    <EntityTypes>
+      <ClassTypes>
+        <ClassType ID="ABC.Database.Oracle.Foglight.MonitoringServer" Accessibility="Public" Abstract="false" Base="Windows!Microsoft.Windows.ComputerRole" Hosted="true" Singleton="false" Extension="false" />
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Base" Accessibility="Public" Abstract="true" Base="System!System.LogicalEntity" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="longName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="dbName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Database" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Server" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Listener" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Tablespace" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="tableSpaceName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="status" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="contents" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="blocksize" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="retention" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+        <ClassType ID="ABC.Database.Oracle.Foglight.DBO.Agent" Accessibility="Public" Abstract="false" Base="ABC.Database.Oracle.Foglight.DBO.Base" Hosted="false" Singleton="false" Extension="false">
+          <Property ID="uniqueId" Type="string" AutoIncrement="false" Key="true" CaseSensitive="true" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="agentVersion" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="agentName" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="build" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="monitoringHost" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+          <Property ID="type" Type="string" AutoIncrement="false" Key="false" CaseSensitive="false" MaxLength="256" MinLength="0" Required="false" Scale="0" />
+        </ClassType>
+      </ClassTypes>
+      <RelationshipTypes>
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Server" />
+        </RelationshipType>
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Database" />
+        </RelationshipType>
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Listener" />
+        </RelationshipType>
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Agent" />
+        </RelationshipType>
+        <RelationshipType ID="ABC.Database.Oracle.Foglight.DatabaseHostsTablespace" Accessibility="Public" Abstract="false" Base="System!System.Containment">
+          <Source ID="Source" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Database" />
+          <Target ID="Target" MinCardinality="0" MaxCardinality="2147483647" Type="ABC.Database.Oracle.Foglight.DBO.Tablespace" />
+        </RelationshipType>
+      </RelationshipTypes>
+    </EntityTypes>
+    <ModuleTypes>
+      <DataSourceModuleType ID="ABC.Database.Foglight.AggTestAdv.Propertybag.Filtered" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="qryItem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="xmlShare" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="uniqueId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="xmlShare" Selector="$Config/xmlShare$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="DS" TypeID="ABC.Database.Foglight.AggTestAdv.Propertybag">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+                <qryItem>$Config/qryItem$</qryItem>
+                <xmlShare>$Config/xmlShare$</xmlShare>
+              </DataSource>
+              <ConditionDetection ID="Filter" TypeID="System!System.ExpressionFilter">
+                <Expression>
+                  <SimpleExpression>
+                    <ValueExpression>
+                      <XPathQuery Type="String">Property[@Name="uniqueId"]</XPathQuery>
+                    </ValueExpression>
+                    <Operator>Equal</Operator>
+                    <ValueExpression>
+                      <Value Type="String">$Config/uniqueId$</Value>
+                    </ValueExpression>
+                  </SimpleExpression>
+                </Expression>
+              </ConditionDetection>
+            </MemberModules>
+            <Composition>
+              <Node ID="Filter">
+                <Node ID="DS" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <DataSourceModuleType ID="ABC.Database.Foglight.AggTestAdv.Propertybag" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="qryItem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="xmlShare" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="xmlShare" Selector="$Config/xmlShare$" ParameterType="string" />
+        </OverrideableParameters>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <DataSource ID="Schedule" TypeID="System!System.SimpleScheduler">
+                <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+                <SyncTime>$Config/SyncTime$</SyncTime>
+              </DataSource>
+              <ProbeAction ID="Script" TypeID="ABC.Database.Foglight.AggTestAdv.Probe">
+                <qryItem>$Config/qryItem$</qryItem>
+                <xmlShare>$Config/xmlShare$</xmlShare>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Script">
+                <Node ID="Schedule" />
+              </Node>
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+      </DataSourceModuleType>
+      <ProbeActionModuleType ID="ABC.Database.Foglight.AggTestAdv.Probe" Accessibility="Internal">
+        <Configuration>
+          <xsd:element name="qryItem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="xmlShare" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <ModuleImplementation>
+          <Composite>
+            <MemberModules>
+              <ProbeAction ID="Script" TypeID="Windows!Microsoft.Windows.ScriptPropertyBagProbe">
+                <ScriptName>MonitorDBOAdv.vbs</ScriptName>
+                <Arguments>$Config/qryItem$ "$Config/xmlShare$"</Arguments>
+                <ScriptBody><![CDATA[strQryItem = WScript.Arguments(0)
+strXmlShare = WScript.Arguments(1)
+
+Set objWShell = CreateObject("WScript.Shell")
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+Set objAPI = CreateObject("MOM.ScriptAPI")
+
+Set dictXMLFiles = WScript.CreateObject("Scripting.Dictionary")
+dictXMLFiles.Add "Servers", "fogoracledboServers.xml"
+dictXMLFiles.Add "Database", "fogoracledboDatabase.xml"
+dictXMLFiles.Add "Datafile", "fogoracledboDatafile.xml"
+dictXMLFiles.Add "Tablespace", "fogoracledboTablespace.xml"
+dictXMLFiles.Add "Listener", "fogoracledboListenerstatus.xml"
+dictXMLFiles.Add "Agent", "fogoracledboAgentModel.xml"
+
+strXMLFileSelected = dictXMLFiles.Item(strQryItem)
+strXMLSrc = strXmlShare & "\" &strXMLFileSelected
+
+
+If objFSO.FileExists(strXMLSrc) Then
+	strFoo = "continue"
+Else
+	strFoo = "stope here"
+	WScript.Quit(1)
+End If
+
+
+Set xmlDoc = WScript.CreateObject("Microsoft.XMLDOM")
+xmlDoc.load(strXMLSrc)
+
+Set objDoc = xmlDoc.selectNodes("//top-objects/top-obj")
+	
+Set allObjects = WScript.CreateObject("System.Collections.ArrayList")
+
+For Each node In objDoc
+	
+	Set tmpObject = WScript.CreateObject("Scripting.Dictionary")
+	For Each child In node.childNodes		
+		strPair = ""
+		For Each attrib In child.attributes
+			strPair = strPair & "^"  & (attrib.nodeValue)			
+		Next	
+		strPair = Right(strPair,Len(strPair)-1)
+		arrPair = Split(strPair,"^")
+		tmpObject.Add arrPair(0), arrPair(1)
+		
+		If(arrPair(0) = "aggregateState") Then
+			Select Case arrPair(1) 
+				Case 0
+					strState = "Good"
+				Case 1
+					strState = "Good"
+				Case 2
+					strState = "Good"
+				Case 3
+					strState = "Bad"
+				Case 4
+					strState = "Bad" 		
+			End Select
+			tmpObject.Add "Result", strState
+		End If		
+		
+	Next	
+	allObjects.add(tmpObject)
+	Set tmpObject = Nothing 
+	
+Next
+
+For Each itm In allObjects	
+
+	strLongName = ""
+	strHealthValue = ""
+	strUniqueId = ""
+
+	strLongName = itm.Item("longName") 
+	strHealthValue = itm.Item("Result") 
+	strUniqueId = itm.Item("uniqueId") 
+	strUniqueId = Replace(strUniqueId,"-","")
+	strBag = "long: " &strLongName & " health: " &strHealthValue & " uid: " &strUniqueId
+
+	If ( (strLongName <> "" ) And ( strHealthValue <> "" ) And ( strUniqueId <> "" ) ) Then        
+		Set objBag = objAPI.CreatePropertyBag()	
+		Call objBag.AddValue("uniqueId",strUniqueId)    	
+		Call objBag.AddValue("longName",strLongName)
+		Call objBag.AddValue("Result",strHealthValue)    
+		objAPI.AddItem(objBag)            
+	Else        
+		strFoo = "issue happened."        
+	End If                  
+
+Next
+
+objAPI.ReturnItems
+WScript.Quit(0)]]></ScriptBody>
+                <TimeoutSeconds>60</TimeoutSeconds>
+              </ProbeAction>
+            </MemberModules>
+            <Composition>
+              <Node ID="Script" />
+            </Composition>
+          </Composite>
+        </ModuleImplementation>
+        <OutputType>System!System.PropertyBagData</OutputType>
+        <InputType>System!System.BaseData</InputType>
+      </ProbeActionModuleType>
+    </ModuleTypes>
+    <MonitorTypes>
+      <UnitMonitorType ID="ABC.Database.Foglight.AggTestAdv.MonitorType" Accessibility="Internal">
+        <MonitorTypeStates>
+          <MonitorTypeState ID="Success" NoDetection="false" />
+          <MonitorTypeState ID="Failure" NoDetection="false" />
+        </MonitorTypeStates>
+        <Configuration>
+          <xsd:element name="IntervalSeconds" type="xsd:integer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="SyncTime" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="qryItem" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="xmlShare" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+          <xsd:element name="uniqueId" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+        </Configuration>
+        <OverrideableParameters>
+          <OverrideableParameter ID="IntervalSeconds" Selector="$Config/IntervalSeconds$" ParameterType="int" />
+          <OverrideableParameter ID="SyncTime" Selector="$Config/SyncTime$" ParameterType="string" />
+          <OverrideableParameter ID="xmlShare" Selector="$Config/xmlShare$" ParameterType="string" />
+        </OverrideableParameters>
+        <MonitorImplementation>
+          <MemberModules>
+            <DataSource ID="DataSource" TypeID="ABC.Database.Foglight.AggTestAdv.Propertybag.Filtered">
+              <IntervalSeconds>$Config/IntervalSeconds$</IntervalSeconds>
+              <SyncTime>$Config/SyncTime$</SyncTime>
+              <qryItem>$Config/qryItem$</qryItem>
+              <xmlShare>$Config/xmlShare$</xmlShare>
+              <uniqueId>$Config/uniqueId$</uniqueId>
+            </DataSource>
+            <ConditionDetection ID="FilterSuccess" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">Good</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+            <ConditionDetection ID="FilterFailure" TypeID="System!System.ExpressionFilter">
+              <Expression>
+                <SimpleExpression>
+                  <ValueExpression>
+                    <XPathQuery Type="String">Property[@Name='Result']</XPathQuery>
+                  </ValueExpression>
+                  <Operator>Equal</Operator>
+                  <ValueExpression>
+                    <Value Type="String">Bad</Value>
+                  </ValueExpression>
+                </SimpleExpression>
+              </Expression>
+            </ConditionDetection>
+          </MemberModules>
+          <RegularDetections>
+            <RegularDetection MonitorTypeStateID="Success">
+              <Node ID="FilterSuccess">
+                <Node ID="DataSource" />
+              </Node>
+            </RegularDetection>
+            <RegularDetection MonitorTypeStateID="Failure">
+              <Node ID="FilterFailure">
+                <Node ID="DataSource" />
+              </Node>
+            </RegularDetection>
+          </RegularDetections>
+        </MonitorImplementation>
+      </UnitMonitorType>
+    </MonitorTypes>
+  </TypeDefinitions>
+  <Monitoring>
+    <Discoveries>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.MonitoringServer" Target="Windows!Microsoft.Windows.Server.Computer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.MonitoringServer" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.FilteredRegistryDiscoveryProvider">
+          <ComputerName>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</ComputerName>
+          <RegistryAttributeDefinitions>
+            <RegistryAttributeDefinition>
+              <AttributeName>KeyExists</AttributeName>
+              <Path>SOFTWARE\ABCIT\OracleFoglightMonitoringServer</Path>
+              <PathType>0</PathType>
+              <AttributeType>0</AttributeType>
+            </RegistryAttributeDefinition>
+          </RegistryAttributeDefinitions>
+          <Frequency>86400</Frequency>
+          <ClassId>$MPElement[Name="ABC.Database.Oracle.Foglight.MonitoringServer"]$</ClassId>
+          <InstanceSettings>
+            <Settings>
+              <Setting>
+                <Name>$MPElement[Name="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Name>
+                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+              <Setting>
+                <Name>$MPElement[Name="System!System.Entity"]/DisplayName$</Name>
+                <Value>$Target/Property[Type="Windows!Microsoft.Windows.Computer"]/PrincipalName$</Value>
+              </Setting>
+            </Settings>
+          </InstanceSettings>
+          <Expression>
+            <SimpleExpression>
+              <ValueExpression>
+                <XPathQuery>Values/KeyExists</XPathQuery>
+              </ValueExpression>
+              <Operator>Equal</Operator>
+              <ValueExpression>
+                <Value>true</Value>
+              </ValueExpression>
+            </SimpleExpression>
+          </Expression>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Tablespace" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.DBO.Tablespace" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>Tablespace</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Servers" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.DBO.Server" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>Servers</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Relations" Target="SC!Microsoft.SystemCenter.RootManagementServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryRelationship TypeID="ABC.Database.Oracle.Foglight.DatabaseHostsTablespace" />
+          <DiscoveryRelationship TypeID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent" />
+          <DiscoveryRelationship TypeID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase" />
+          <DiscoveryRelationship TypeID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener" />
+          <DiscoveryRelationship TypeID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBORelations.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId)
+
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0,$sourceId,$managedEntityId)
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight DiscoverDBORelations.ps1',201,4,"ABC.Database.Oracle.Foglight DiscoverDBORelations starts")
+
+$classDatabaseSystem = Get-SCOMClass -Name 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+$classDatabaseSystemInstances = Get-SCOMClassInstance -Class $classDatabaseSystem
+
+$classDatabase = Get-SCOMClass -Name 'ABC.Database.Oracle.Foglight.DBO.Database'
+$classDatabaseInstances = Get-SCOMClassInstance -Class $classDatabase
+
+$classServer = Get-SCOMClass -Name 'ABC.Database.Oracle.Foglight.DBO.Server'
+$classServerInstances = Get-SCOMClassInstance -Class $classServer
+
+$classListener = Get-Scomclass -Name 'ABC.Database.Oracle.Foglight.DBO.Listener'
+$classListenerInstances =  Get-SCOMClassInstance -Class $classListener
+
+$classTablespace = Get-SCOMClass -Name 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+$classTablespaceInstances = Get-SCOMClassInstance -Class $classTablespace
+
+$classAgent = Get-SCOMClass -Name 'ABC.Database.Oracle.Foglight.DBO.Agent'
+$classAgentInstances = Get-SCOMClassInstance -Class $classAgent
+
+
+foreach ($dbObj in $classDatabaseSystemInstances) {
+		
+	$dbName = $dbObj.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.Value
+		
+	$srcInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$", $dbObj.'[ABC.Database.Oracle.Foglight.DBO.DatabaseSystem].uniqueId'.Value)
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $dbObj.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)	
+	$discoveryData.AddInstance($srcInstance)
+
+	$dbInstances = $classDatabaseInstances | Where-Object {$_.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.value -imatch $dbName}
+	foreach($dbI in $dbInstances) {
+
+		$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$", $dbI.'[ABC.Database.Oracle.Foglight.DBO.Database].uniqueId'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $dbI.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)		
+		$discoveryData.AddInstance($targetInstance)
+	
+		$relInstance = $discoveryData.CreateRelationShipInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase']$")
+		$relInstance.Source = $srcInstance
+		$relInstance.Target = $targetInstance
+		$discoveryData.AddInstance($relInstance)
+
+	} #END foreach($dbI in $dbInstances)  
+
+	$serverInstances = $classServerInstances | Where-Object {$_.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.value -imatch $dbName}
+	foreach($server in $serverInstances) {
+
+		$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$", $server.'[ABC.Database.Oracle.Foglight.DBO.Server].uniqueId'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $server.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)		
+		$discoveryData.AddInstance($targetInstance)
+	
+		$relInstance = $discoveryData.CreateRelationShipInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer']$")
+		$relInstance.Source = $srcInstance
+		$relInstance.Target = $targetInstance
+		$discoveryData.AddInstance($relInstance)
+
+	} #END foreach($server in $classServerInstances) 
+
+	$listenerInstances = $classListenerInstances | Where-Object {$_.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.value -imatch $dbName}
+	foreach($listener in $listenerInstances) {
+
+		$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$", $listener.'[ABC.Database.Oracle.Foglight.DBO.Listener].uniqueId'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $listener.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)		
+		$discoveryData.AddInstance($targetInstance)
+	
+		$relInstance = $discoveryData.CreateRelationShipInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener']$")
+		$relInstance.Source = $srcInstance
+		$relInstance.Target = $targetInstance
+		$discoveryData.AddInstance($relInstance)
+
+	} #END foreach($server in $classServerInstances)
+		
+	$agentInstances = $classAgentInstances | Where-Object {$_.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.value -imatch $dbName}
+	foreach($agent in $agentInstances) {
+
+		$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].uniqueId'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].agentVersion'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].agentName'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].build'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].monitoringHost'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$", $agent.'[ABC.Database.Oracle.Foglight.DBO.Agent].type'.Value)		
+		$discoveryData.AddInstance($targetInstance)
+	
+		$relInstance = $discoveryData.CreateRelationShipInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent']$")
+		$relInstance.Source = $srcInstance
+		$relInstance.Target = $targetInstance
+		$discoveryData.AddInstance($relInstance)
+
+	} #END foreach($agent in $agentInstances)
+			
+} #END foreach($dbObj in $classDatabaseInstances) 
+
+
+foreach ($dbObj in $classDatabaseInstances) {
+		
+	$dbName = $dbObj.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.Value
+
+	$srcInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$", $dbObj.'[ABC.Database.Oracle.Foglight.DBO.Database].uniqueId'.Value)
+	$srcInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $dbObj.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)	
+	$discoveryData.AddInstance($srcInstance)
+
+	$tableSpaceInstances = $classTablespaceInstances | Where-Object {$_.'[ABC.Database.Oracle.Foglight.DBO.Base].dbName'.value -imatch $dbName}
+	foreach($tablespace in $tableSpaceInstances) {
+
+		$targetInstance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$", $dbName)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].uniqueId'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Base].longName'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].tableSpaceName'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].status'.Value)		
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].contents'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].retention'.Value)
+		$targetInstance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$", $tablespace.'[ABC.Database.Oracle.Foglight.DBO.Tablespace].blocksize'.Value)		
+		$discoveryData.AddInstance($targetInstance)
+	
+		$relInstance = $discoveryData.CreateRelationShipInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DatabaseHostsTablespace']$")
+		$relInstance.Source = $srcInstance
+		$relInstance.Target = $targetInstance
+		$discoveryData.AddInstance($relInstance)
+
+	} #END foreach($tablespace in $tableSpaceInstances)	
+	
+} #END foreach ($dbObj in $classDatabaseInstances) 
+
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>300</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Listener" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.DBO.Listener" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>Listener</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.DatabaseSystem" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>DatabaseSystem</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Database" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="ABC.Database.Oracle.Foglight.DBO.Database" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>Database</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+      <Discovery ID="ABC.Database.Oracle.Foglight.Discover.DBO.Agent" Target="ABC.Database.Oracle.Foglight.MonitoringServer" Enabled="true" ConfirmDelivery="false" Remotable="true" Priority="Normal">
+        <Category>Discovery</Category>
+        <DiscoveryTypes>
+          <DiscoveryClass TypeID="SC!Microsoft.SystemCenter.Agent" />
+        </DiscoveryTypes>
+        <DataSource ID="DS" TypeID="Windows!Microsoft.Windows.TimedPowerShell.DiscoveryProvider">
+          <IntervalSeconds>600</IntervalSeconds>
+          <SyncTime />
+          <ScriptName>DiscoverDBOs.ps1</ScriptName>
+          <ScriptBody><![CDATA[param($sourceId,$managedEntityId,$qryItem)
+
+$api = New-Object -ComObject 'MOM.ScriptAPI'
+$discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
+
+$xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+$xmlFileHash = @{
+  'Servers' = 'fogoracledboServers.xml'
+  'Database' = 'fogoracledboDatabase.xml'
+  'DatabaseSystem' = 'fogoracledboDatabase.xml'
+  'Tablespace' = 'fogoracledboTablespace.xml'
+  'Agent' = 'fogoracledboAgentModel.xml'
+  'Listener' = 'fogoracledboListenerstatus.xml'
+}
+
+$xmlFile = $xmlFileHash[$qryItem]
+$xmlFilePath += $xmlFile
+$xmlFileContent = Get-Content -Path $xmlFilePath
+
+#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
+
+Function Convert-XmlToObjectDicts {
+  param(
+	[ref]$outDict,
+	[array]$xmlFileContent,
+	[string]$qryItem
+  )
+
+  $rtn = $false
+
+  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
+
+  $xmlDBOChilds | ForEach-Object {
+	$xmlDboChild = $_
+	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId = $uniqueId -replace '-',''
+	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
+
+	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+
+	$null = [int]::TryParse($localState, [ref]$localState)
+	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
+	$null = [int]::TryParse($alarmTotalCount, [ref]$alarmTotalCount)
+	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
+	$null = [int]::TryParse($blocksize, [ref]$blocksize)
+
+	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	[datetime]$lastUpdatedTime = [datetime]::Now
+	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
+	$culture = [System.Globalization.CultureInfo]::InvariantCulture
+	$style = [System.Globalization.DateTimeStyles]::None
+	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+
+	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
+
+	if ( $($dbName.Length) -gt 0 ) {
+	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+		}
+	  } elseif ($qryItem -eq 'DatabaseSystem') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId + '-Sys'
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $dbName + '_Long'
+			  [string]'dbName' = $dbName
+		}
+		$dbName += $fileName
+	  } elseif ($qryItem -eq 'Tablespace') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'tableSpaceName' = $tablespaceName
+			  [string]'status' = $status
+			  [string]'contents' = $contents
+			  [string]'retention' = $retention
+			  'blocksize' = $blocksize
+		}
+		$dbName += $tablespaceName
+	  } elseif ($qryItem -eq 'Agent') {
+		$dboObj = [PSCustomObject] @{
+			  [string]'uniqueId' = $uniqueId
+			  'lastUpdated' = $lastUpdatedTime
+			  [string]'longName' = $longName
+			  [string]'dbName' = $dbName
+			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState' = $localState
+			  'aggregateState' = $aggregateState
+			  'alarmTotalCount' = $alarmTotalCount
+			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
+			  [string]'agentVersion' = $agentVersion
+			  [string]'agentName' = $agentName
+			  [string]'build' = $build
+			  [string]'monitoringHost' = $monitoringHost
+			  [string]'type' = $type
+		}
+	  } else {
+		$dboObj = $null
+	  }
+	  $null = $dboDict.Add($dbName,$dboObj)
+	} else {
+	  $foo = 'skipping empty entry'
+	}
+  } #END $xmlDBOChilds | ForEach-Object { }
+
+  #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',101,4,"DiscoverDBOs.ps1 Convert... - dboDict.count $($dboDict.Count) for qyrItem $($qryItem)")
+
+  $outDict.Value = $dboDict
+
+  if ($dboDict.Count -gt 1) {
+	$rtn = $true
+  } else {
+	$rtn = $false
+  }
+} #END Function Convert-XmlToObjectDicts { }
+
+Function Publish-ObjectToSCOM {
+  param(
+	[string]$qryItem,
+	[System.Collections.Generic.Dictionary[String,PSCustomObject]]$dboDict,
+	[ref]$stateMsg
+  )
+
+  $rtn = $false
+
+  $fglClasses = @{
+	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
+	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+  }
+
+  $fglClass = $fglClasses[$qryItem]
+
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,4,"DiscoverDBOs.ps1 - Publish ... - fglClass $($fglClass) - qryItem $($qryItem)")
+	#$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',102,2,"DiscoverDBOs.ps1 - Publish ... - dboDict.Count $($dboDict.Count)")
+
+  foreach ($dboItem in $dboDict.Values) {
+	  $displayName = "$($qryItem)-$($dboItem.dbName)"
+	if($qryItem -eq 'Servers') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Server']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Database') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Database']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'DatabaseSystem') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.DatabaseSystem']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Listener') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Listener']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Tablespace') {
+		$displayName = "$($qryItem)-$($dboItem.dbName)-$($dboItem.tableSpaceName)"
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/tableSpaceName$",$dboItem.tableSpaceName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/status$",$dboItem.status)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/contents$",$dboItem.contents)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/retention$",$dboItem.retention)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Tablespace']/blocksize$",$dboItem.blocksize)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} elseif ($qryItem -eq 'Agent') {
+		$instance = $discoveryData.CreateClassInstance("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']$")
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/uniqueId$",$dboItem.uniqueId)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/longName$",$dboItem.longName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Base']/dbName$",$dboItem.dbName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentVersion$",$dboItem.agentVersion)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/agentName$",$dboItem.agentName)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/build$",$dboItem.build)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/monitoringHost$",$dboItem.monitoringHost)
+		$instance.AddProperty("$MPElement[Name='ABC.Database.Oracle.Foglight.DBO.Agent']/type$",$dboItem.type)
+		$instance.AddProperty("$MPElement[Name='System!System.Entity']/DisplayName$", $displayName)
+		$discoveryData.AddInstance($instance)
+	} else {
+		$foo = 'bar'
+	}
+  } #END foreach ($domItem in $dboDict.Value) { }
+
+  if($Error) {
+	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
+	$rtn = $false
+  } else {
+	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
+	$rtn = $true
+  }
+} #END Function Publish-ObjectToSCOM {}
+
+$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+
+$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+
+$publishObjMsg = ''
+$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+
+$discoveryData]]></ScriptBody>
+          <Parameters>
+            <Parameter>
+              <Name>sourceId</Name>
+              <Value>$MPElement$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>managedEntityId</Name>
+              <Value>$Target/Id$</Value>
+            </Parameter>
+            <Parameter>
+              <Name>qryItem</Name>
+              <Value>Agent</Value>
+            </Parameter>
+          </Parameters>
+          <TimeoutSeconds>120</TimeoutSeconds>
+        </DataSource>
+      </Discovery>
+    </Discoveries>
+    <Monitors>
+      <AggregateMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal">
+        <Category>AvailabilityHealth</Category>
+        <Algorithm>WorstOf</Algorithm>
+      </AggregateMonitor>
+      <UnitMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Tablespace" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.Tablespace" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="ABC.Database.Foglight.AggTestAdv.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>300</IntervalSeconds>
+          <SyncTime />
+          <qryItem>Tablespace</qryItem>
+          <xmlShare>\\server\FoglightMonitoring</xmlShare>
+          <uniqueId>$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Tablespace"]/uniqueId$</uniqueId>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Server" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.Server" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="ABC.Database.Foglight.AggTestAdv.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>300</IntervalSeconds>
+          <SyncTime />
+          <qryItem>Servers</qryItem>
+          <xmlShare>\\server\FoglightMonitoring</xmlShare>
+          <uniqueId>$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Server"]/uniqueId$</uniqueId>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Listener" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.Listener" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="ABC.Database.Foglight.AggTestAdv.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>300</IntervalSeconds>
+          <SyncTime />
+          <qryItem>Listener</qryItem>
+          <xmlShare>\\server\FoglightMonitoring</xmlShare>
+          <uniqueId>$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Listener"]/uniqueId$</uniqueId>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Database" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.Database" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="ABC.Database.Foglight.AggTestAdv.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>300</IntervalSeconds>
+          <SyncTime />
+          <qryItem>Database</qryItem>
+          <xmlShare>\\server\FoglightMonitoring</xmlShare>
+          <uniqueId>$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Database"]/uniqueId$</uniqueId>
+        </Configuration>
+      </UnitMonitor>
+      <UnitMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Agent" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.Agent" ParentMonitorID="Health!System.Health.AvailabilityState" Remotable="true" Priority="Normal" TypeID="ABC.Database.Foglight.AggTestAdv.MonitorType" ConfirmDelivery="false">
+        <Category>AvailabilityHealth</Category>
+        <OperationalStates>
+          <OperationalState ID="Success" MonitorTypeStateID="Success" HealthState="Success" />
+          <OperationalState ID="Failure" MonitorTypeStateID="Failure" HealthState="Error" />
+        </OperationalStates>
+        <Configuration>
+          <IntervalSeconds>300</IntervalSeconds>
+          <SyncTime />
+          <qryItem>Agent</qryItem>
+          <xmlShare>\\server\FoglightMonitoring</xmlShare>
+          <uniqueId>$Target/Property[Type="ABC.Database.Oracle.Foglight.DBO.Agent"]/uniqueId$</uniqueId>
+        </Configuration>
+      </UnitMonitor>
+      <DependencyMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnServer" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ParentMonitorID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem" Remotable="true" Priority="Normal" RelationshipType="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer" MemberMonitor="Health!System.Health.AvailabilityState">
+        <Category>AvailabilityHealth</Category>
+        <Algorithm>WorstOf</Algorithm>
+      </DependencyMonitor>
+      <DependencyMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnListener" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ParentMonitorID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem" Remotable="true" Priority="Normal" RelationshipType="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener" MemberMonitor="Health!System.Health.AvailabilityState">
+        <Category>AvailabilityHealth</Category>
+        <Algorithm>WorstOf</Algorithm>
+      </DependencyMonitor>
+      <DependencyMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnDatabase" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ParentMonitorID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem" Remotable="true" Priority="Normal" RelationshipType="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase" MemberMonitor="Health!System.Health.AvailabilityState">
+        <Category>AvailabilityHealth</Category>
+        <Algorithm>WorstOf</Algorithm>
+      </DependencyMonitor>
+      <DependencyMonitor ID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnAgent" Accessibility="Internal" Enabled="true" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ParentMonitorID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem" Remotable="true" Priority="Normal" RelationshipType="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent" MemberMonitor="Health!System.Health.AvailabilityState">
+        <Category>AvailabilityHealth</Category>
+        <Algorithm>WorstOf</Algorithm>
+      </DependencyMonitor>
+    </Monitors>
+  </Monitoring>
+  <Presentation>
+    <Views>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.MonitoringServer" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.MonitoringServer" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO.Tablespace" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.Tablespace" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO.Server" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.Server" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO.Listener" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.Listener" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO.Database" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.Database" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO.Agent" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.Agent" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+      <View ID="ABC.Database.Oracle.Foglight.View.State.DBO..DatabaseSystem" Accessibility="Internal" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" TypeID="SC!Microsoft.SystemCenter.StateViewType" Visible="true">
+        <Category>Operations</Category>
+      </View>
+    </Views>
+    <Folders>
+      <Folder ID="ABC.Database.Oracle.Foglight.Folder" Accessibility="Internal" ParentFolder="SC!Microsoft.SystemCenter.Monitoring.ViewFolder.Root" />
+    </Folders>
+    <FolderItems>
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.MonitoringServer" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.MonitoringServer.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Tablespace" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO.Tablespace.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Server" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO.Server.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Listener" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO.Listener.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Database" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO.Database.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Agent" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO.Agent.FolderItem" />
+      <FolderItem ElementID="ABC.Database.Oracle.Foglight.View.State.DBO..DatabaseSystem" Folder="ABC.Database.Oracle.Foglight.Folder" ID="ABC.Database.Oracle.Foglight.View.State.DBO..DatabaseSystem.FolderItem" />
+    </FolderItems>
+  </Presentation>
+  <LanguagePacks>
+    <LanguagePack ID="ENU" IsDefault="true">
+      <DisplayStrings>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Tablespace">
+          <Name>Tablespace Monitor</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Tablespace" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Tablespace" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Server">
+          <Name>Server Monitor</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Server" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Server" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Listener">
+          <Name>Listener Monitor</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Listener" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Listener" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Database">
+          <Name>Database Monitor</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Database" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Database" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Agent">
+          <Name>Agent Monitor</Name>
+          <Description>Description for the new unit monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Agent" SubElementID="Success">
+          <Name>Success</Name>
+          <Description>Success</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Agent" SubElementID="Failure">
+          <Name>Failure</Name>
+          <Description>Failure</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Ag.DatabaseSystem">
+          <Name>Monitor.Ag.DatabaseSystem</Name>
+          <Description>Description for new aggregate monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnServer">
+          <Name>DatabaseSystemDependsOnServer</Name>
+          <Description>Description for new dependency monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnListener">
+          <Name>DatabaseSystemDependsOnListener</Name>
+          <Description>Description for new dependency monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnDatabase">
+          <Name>DatabaseSystemDependsOnDatabase</Name>
+          <Description>Description for new dependency monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Monitor.Dep.DatabaseSystemOnAgent">
+          <Name>DatabaseSystemDependsOnAgent</Name>
+          <Description>Description for new dependency monitor.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight">
+          <Name>ABC Database Oracle Foglight</Name>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.MonitoringServer">
+          <Name>ABC Database Oracle Foglight MonitoringServer</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base">
+          <Name>ABC Database Oracle Foglight Base</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base" SubElementID="dbName">
+          <Name>dbName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Base" SubElementID="longName">
+          <Name>longName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem">
+          <Name>ABC Database Oracle Foglight DatabaseSystem</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Database">
+          <Name>ABC Database Oracle Foglight Database</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Database" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Server">
+          <Name>ABC Database Oracle Foglight Server</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Server" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Listener">
+          <Name>ABC Database Oracle Foglight Listener</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Listener" SubElementID="uniqueId">
+          <Name>unqiueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace">
+          <Name>ABC Datatabase Oracle Foglight Tablespace</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="blocksize">
+          <Name>blocksize</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="contents">
+          <Name>contents</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="retention">
+          <Name>retention</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="status">
+          <Name>status</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" SubElementID="tableSpaceName">
+          <Name>tableSpaceName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent">
+          <Name>ABC Datatabase Oracle Foglight Agent</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="uniqueId">
+          <Name>uniqueId</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="agentVersion">
+          <Name>agentVersion</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="build">
+          <Name>build</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="monitoringHost">
+          <Name>monitoringHost</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="type">
+          <Name>type</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" SubElementID="agentName">
+          <Name>agentName</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsListener">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsListener</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsServer">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsServer</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsAgent">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsAgent</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseHostsTablespace">
+          <Name>ABC Database Oracle Foglight DatabaseHostsTablespace</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.DatabaseSystemHostsDatabase">
+          <Name>ABC Database Oracle Foglight DatabaseSystemHostsDatabase</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.MonitoringServer">
+          <Name>Discover Aruba Devices  MonitoringServer</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Tablespace">
+          <Name>Discover DBO Tablespace</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Servers">
+          <Name>Discover DBO Servers</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Relations">
+          <Name>Discover.DBO.Relations</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Listener">
+          <Name>Discover DBO Listener</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.DatabaseSystem">
+          <Name>Discover DBO DatabaseSystem</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Database">
+          <Name>Discover DBO Database</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Discover.DBO.Agent">
+          <Name>Discover DBO Agent</Name>
+          <Description>Description for the new discovery.</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.Folder">
+          <Name>ABC Database Oracle Foglight</Name>
+          <Description></Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.MonitoringServer">
+          <Name>MonitoringServer</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Tablespace">
+          <Name>DBO Tablespace</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Server">
+          <Name>DBO Server</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Listener">
+          <Name>DBO Listener</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Database">
+          <Name>DBO Database</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO.Agent">
+          <Name>DBO Agent</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+        <DisplayString ElementID="ABC.Database.Oracle.Foglight.View.State.DBO..DatabaseSystem">
+          <Name>DBO Database System</Name>
+          <Description>Description for the new view</Description>
+        </DisplayString>
+      </DisplayStrings>
+      <KnowledgeArticles></KnowledgeArticles>
+    </LanguagePack>
+  </LanguagePacks>
+</ManagementPack>
