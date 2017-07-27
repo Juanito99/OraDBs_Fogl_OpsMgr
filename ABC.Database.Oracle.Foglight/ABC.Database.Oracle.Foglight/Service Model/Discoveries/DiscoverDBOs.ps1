@@ -4,17 +4,18 @@ $api = New-Object -ComObject 'MOM.ScriptAPI'
 $discoveryData = $api.CreateDiscoveryData(0, $sourceId, $managedEntityId)
 
 $xmlFilePath = 'C:\Temp\FoglightMonitoring\'
+
 $xmlFileHash = @{
-  'Servers' = 'fogoracledboServers.xml'
-  'Database' = 'fogoracledboDatabase.xml'
+  'Servers'        = 'fogoracledboServers.xml'
+  'Database'       = 'fogoracledboDatabase.xml'
   'DatabaseSystem' = 'fogoracledboDatabase.xml'
-  'Tablespace' = 'fogoracledboTablespace.xml'
-  'Agent' = 'fogoracledboAgentModel.xml'
-  'Listener' = 'fogoracledboListenerstatus.xml'
+  'Tablespace'     = 'fogoracledboTablespace.xml'
+  'Agent'          = 'fogoracledboAgentModel.xml'
+  'Listener'       = 'fogoracledboListenerstatus.xml'
 }
 
-$xmlFile = $xmlFileHash[$qryItem]
-$xmlFilePath += $xmlFile
+$xmlFile        = $xmlFileHash[$qryItem]
+$xmlFilePath   += $xmlFile
 $xmlFileContent = Get-Content -Path $xmlFilePath
 
 #$api.LogScriptEvent('ABC.Database.Oracle.Foglight.DBO - DiscoverDBOs.ps1',100,4,"DiscoverDBOs.ps1 Started - Source $($sourceId) managEnt $($managedEntityId) qryItem $($qryItem)")
@@ -28,34 +29,34 @@ Function Convert-XmlToObjectDicts {
 
   $rtn = $false
 
-  $dboDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+  $dboDict      = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
   $xmlDBOChilds = ([xml]$xmlFileContent).'top-objects'.'top-obj'
 
   $xmlDBOChilds | ForEach-Object {
-	$xmlDboChild = $_
-	$uniqueId  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
-	$uniqueId = $uniqueId -replace '-',''
-	$lastUpdated  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
-	$longName  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
-	$isBlackedOut  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
-	$localState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
-	$aggregateState  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
-	$alarmTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
+	$xmlDboChild               = $_
+	$uniqueId                  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'uniqueId' }).value
+	$uniqueId                  = $uniqueId -replace '-',''
+	$lastUpdated               = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'lastUpdated' }).value
+	$longName                  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'longName' }).value
+	$isBlackedOut              = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'isBlackedOut' }).value
+	$localState                = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'localState' }).value
+	$aggregateState            = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'aggregateState' }).value
+	$alarmTotalCount           = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmTotalCount' }).value
 	$alarmAggregateTotalCount  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'alarmAggregateTotalCount' }).value
 
-	$fileName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
-	$autoExtensible = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
-	$fileSystemName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
-	$tablespaceName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
-	$status = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
-	$contents = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
-	$retention = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
-	$blocksize = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
-	$agentVersion = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
-	$agentName = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
-	$build = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
-	$monitoringHost = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
-	$type = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
+	$fileName                  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'file_name' }).value
+	$autoExtensible            = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'auto_extensible' }).value
+	$fileSystemName            = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'filesystem_name' }).value
+	$tablespaceName            = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'tablespace_name' }).value
+	$status                    = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'status' }).value
+	$contents                  = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'contents' }).value
+	$retention                 = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'retention' }).value
+	$blocksize                 = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'block_size' }).value
+	$agentVersion              = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentVersion' }).value
+	$agentName                 = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'agentName' }).value
+	$build                     = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'build' }).value
+	$monitoringHost            = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'hostname' }).value
+	$type                      = ($xmlDboChild.ChildNodes | Where-Object { $_.Name -eq 'type' }).value
 
 	$null = [int]::TryParse($localState, [ref]$localState)
 	$null = [int]::TryParse($aggregateState, [ref]$aggregateState)
@@ -63,70 +64,70 @@ Function Convert-XmlToObjectDicts {
 	$null = [int]::TryParse($alarmAggregateTotalCount, [ref]$alarmAggregateTotalCount)
 	$null = [int]::TryParse($blocksize, [ref]$blocksize)
 
-	$lastUpdatedS = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
+	$lastUpdatedS              = [Regex]::Matches($($lastUpdated),'\d{4}-\d{2}-\d{2}\s{1}\d{2}\:\d{2}\:\d{2}').Value
 	[datetime]$lastUpdatedTime = [datetime]::Now
-	$dateFormat = 'yyyy-MM-dd HH:mm:ss'
-	$culture = [System.Globalization.CultureInfo]::InvariantCulture
-	$style = [System.Globalization.DateTimeStyles]::None
-	$null = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
+	$dateFormat                = 'yyyy-MM-dd HH:mm:ss'
+	$culture                   = [System.Globalization.CultureInfo]::InvariantCulture
+	$style                     = [System.Globalization.DateTimeStyles]::None
+	$null                      = [datetime]::TryParseExact($lastUpdatedS,$dateformat,$culture,$style,[ref]$lastUpdatedTime)
 
 	$dbName = [Regex]::Matches($($longName),'[a-zA-Z]{5,}[a-zA-Z]{1,}[a-zA-Z]{1,}[dbDB]{2}').Value
 
 	if ( $($dbName.Length) -gt 0 ) {
 	  if($qryItem -eq 'Servers' -or $qryItem -eq 'Database' -or $qryItem -eq 'Listener')  {
 		$dboObj = [PSCustomObject] @{
-			  [string]'uniqueId' = $uniqueId
-			  'lastUpdated' = $lastUpdatedTime
-			  [string]'longName' = $longName
-			  [string]'dbName' = $dbName
-			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
-			  'localState' = $localState
-			  'aggregateState' = $aggregateState
-			  'alarmTotalCount' = $alarmTotalCount
+			  [string]'uniqueId'         = $uniqueId
+			  'lastUpdated'              = $lastUpdatedTime
+			  [string]'longName'         = $longName
+			  [string]'dbName'           = $dbName
+			  [bool]'isBlackedOut'       = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState'               = $localState
+			  'aggregateState'           = $aggregateState
+			  'alarmTotalCount'          = $alarmTotalCount
 			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
 		}
 	  } elseif ($qryItem -eq 'DatabaseSystem') {
 		$dboObj = [PSCustomObject] @{
-			  [string]'uniqueId' = $uniqueId + '-Sys'
-			  'lastUpdated' = $lastUpdatedTime
-			  [string]'longName' = $dbName + '_Long'
-			  [string]'dbName' = $dbName
+			  [string]'uniqueId'         = $uniqueId + '-Sys'
+			  'lastUpdated'              = $lastUpdatedTime
+			  [string]'longName'         = $dbName + '_Long'
+			  [string]'dbName'           = $dbName
 		}
-		$dbName += $fileName
+		$dbName                         += $fileName
 	  } elseif ($qryItem -eq 'Tablespace') {
 		$dboObj = [PSCustomObject] @{
-			  [string]'uniqueId' = $uniqueId
-			  'lastUpdated' = $lastUpdatedTime
-			  [string]'longName' = $longName
-			  [string]'dbName' = $dbName
-			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
-			  'localState' = $localState
-			  'aggregateState' = $aggregateState
-			  'alarmTotalCount' = $alarmTotalCount
+			  [string]'uniqueId'         = $uniqueId
+			  'lastUpdated'              = $lastUpdatedTime
+			  [string]'longName'         = $longName
+			  [string]'dbName'           = $dbName
+			  [bool]'isBlackedOut'       = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState'               = $localState
+			  'aggregateState'           = $aggregateState
+			  'alarmTotalCount'          = $alarmTotalCount
 			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
-			  [string]'tableSpaceName' = $tablespaceName
-			  [string]'status' = $status
-			  [string]'contents' = $contents
-			  [string]'retention' = $retention
-			  'blocksize' = $blocksize
+			  [string]'tableSpaceName'   = $tablespaceName
+			  [string]'status'           = $status
+			  [string]'contents'         = $contents
+			  [string]'retention'        = $retention
+			  'blocksize'                = $blocksize
 		}
-		$dbName += $tablespaceName
+		$dbName                         += $tablespaceName
 	  } elseif ($qryItem -eq 'Agent') {
 		$dboObj = [PSCustomObject] @{
-			  [string]'uniqueId' = $uniqueId
-			  'lastUpdated' = $lastUpdatedTime
-			  [string]'longName' = $longName
-			  [string]'dbName' = $dbName
-			  [bool]'isBlackedOut' = if ($isBlackedOut -eq 'false') { $false } else { $true }
-			  'localState' = $localState
-			  'aggregateState' = $aggregateState
-			  'alarmTotalCount' = $alarmTotalCount
+			  [string]'uniqueId'         = $uniqueId
+			  'lastUpdated'              = $lastUpdatedTime
+			  [string]'longName'         = $longName
+			  [string]'dbName'           = $dbName
+			  [bool]'isBlackedOut'       = if ($isBlackedOut -eq 'false') { $false } else { $true }
+			  'localState'               = $localState
+			  'aggregateState'           = $aggregateState
+			  'alarmTotalCount'          = $alarmTotalCount
 			  'alarmAggregateTotalCount' = $alarmAggregateTotalCount
-			  [string]'agentVersion' = $agentVersion
-			  [string]'agentName' = $agentName
-			  [string]'build' = $build
-			  [string]'monitoringHost' = $monitoringHost
-			  [string]'type' = $type
+			  [string]'agentVersion'     = $agentVersion
+			  [string]'agentName'        = $agentName
+			  [string]'build'            = $build
+			  [string]'monitoringHost'   = $monitoringHost
+			  [string]'type'             = $type
 		}
 	  } else {
 		$dboObj = $null
@@ -158,12 +159,12 @@ Function Publish-ObjectToSCOM {
   $rtn = $false
 
   $fglClasses = @{
-	'Servers' = 'ABC.Database.Oracle.Foglight.DBO.Server'
-	'Database' = 'ABC.Database.Oracle.Foglight.DBO.Database'
+	'Servers'        = 'ABC.Database.Oracle.Foglight.DBO.Server'
+	'Database'       = 'ABC.Database.Oracle.Foglight.DBO.Database'
 	'DatabaseSystem' = 'ABC.Database.Oracle.Foglight.DBO.DatabaseSystem'
-	'Tablespace' = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
-	'Agent' = 'ABC.Database.Oracle.Foglight.DBO.Agent'
-	'Listener' = 'ABC.Database.Oracle.Foglight.DBO.Listener'
+	'Tablespace'     = 'ABC.Database.Oracle.Foglight.DBO.Tablespace'
+	'Agent'          = 'ABC.Database.Oracle.Foglight.DBO.Agent'
+	'Listener'       = 'ABC.Database.Oracle.Foglight.DBO.Listener'
   }
 
   $fglClass = $fglClasses[$qryItem]
@@ -233,19 +234,19 @@ Function Publish-ObjectToSCOM {
 
   if($Error) {
 	$stateMsg.Value = "Publish-ObjectToSCOM - Error occured: $Error"
-	$rtn = $false
+	$rtn            = $false
   } else {
 	$stateMsg.Value = "Publish-ObjectToSCOM - All good."
-	$rtn = $true
+	$rtn            = $true
   }
 } #END Function Publish-ObjectToSCOM {}
 
-$dboDBDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
+$dboDBDict     = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
 $dboServerDict = New-Object -TypeName 'System.Collections.Generic.Dictionary[String,PSCustomObject]'
 
-$rtnDboDB = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
+$rtnDboDB      = Convert-XmlToObjectDicts -outDict ([ref]$dboDBDict) -xmlFileContent $xmlFileContent -qryItem $qryItem
 
 $publishObjMsg = ''
-$rtnPubToSCOM = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
+$rtnPubToSCOM  = Publish-ObjectToSCOM -qryItem $qryItem -dboDict $dboDBDict -stateMsg ([ref]$publishObjMsg)
 
 $discoveryData
