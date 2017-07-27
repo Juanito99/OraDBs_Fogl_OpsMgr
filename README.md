@@ -6,7 +6,8 @@ Url: http://www.rjz.de/OraDBsToOpsMgrViaFoglight
 
 
 
-#License Terms
+
+# License Terms
 
 Integrate Oracle DBs into OpsMgr by using Foglight
 Copyright (C) 2017 Ruben Zimmermann (Juanito99)
