@@ -2,6 +2,9 @@
 
 Integrate Oracle DBs into OpsMgr by using Foglight
 
+![FoglightDatabase](https://raw.githubusercontent.com/Juanito/OraDBs_Fogl_OpsMgr/master/PicturesForGitWebSite/Foglight_Database_Screen.png)
+
+
 Url: http://www.rjz.de/OraDBsToOpsMgrViaFoglight
 
 
