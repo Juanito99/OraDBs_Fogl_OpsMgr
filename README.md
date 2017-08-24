@@ -1,5 +1,3 @@
-# OraDBs_Fogl_OpsMgr
-
 ## Integrate Oracle DBs into OpsMgr by using Foglight
 
 ### Foglight
@@ -10,11 +8,13 @@
 ![Foglight_StateView](https://raw.githubusercontent.com/Juanito99/OraDBs_Fogl_OpsMgr/master/PicturesForGitWebSite/OpsMgr_Foglight_StateViews.png)
 
 
+
 ### More information on:
 Url: http://www.rjz.de/OraDBsToOpsMgrViaFoglight
 
 
-# License Terms
+
+### License Terms
 
 Integrate Oracle DBs into OpsMgr by using Foglight
 Copyright (C) 2017 Ruben Zimmermann (Juanito99)
