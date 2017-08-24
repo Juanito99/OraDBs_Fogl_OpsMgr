@@ -1,0 +1,28 @@
+﻿<ManagementPackFragment SchemaVersion="2.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Categories>
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem.Category" Target="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.Database.Category" Target="ABC.Database.Oracle.Foglight.DBO.Database.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.Server.Category" Target="ABC.Database.Oracle.Foglight.DBO.Server.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.Listener.Category" Target="ABC.Database.Oracle.Foglight.DBO.Listener.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.Agent.Category" Target="ABC.Database.Oracle.Foglight.DBO.Agent.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+    <Category ID="ABC.Database.Oracle.Foglight.DBO.Tablespace.Category" Target="ABC.Database.Oracle.Foglight.DBO.Tablespace.Icon" Value="System!System.Internal.ManagementPack.Images.DiagramIcon" />
+  </Categories>
+  <Presentation>
+    <ImageReferences>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem" ImageID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem.Icon"/>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.Database" ImageID="ABC.Database.Oracle.Foglight.DBO.Database.Icon"/>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.Server" ImageID="ABC.Database.Oracle.Foglight.DBO.Server.Icon"/>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.Listener" ImageID="ABC.Database.Oracle.Foglight.DBO.Listener.Icon"/>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.Agent" ImageID="ABC.Database.Oracle.Foglight.DBO.Agent.Icon"/>
+      <ImageReference ElementID="ABC.Database.Oracle.Foglight.DBO.Tablespace" ImageID="ABC.Database.Oracle.Foglight.DBO.Tablespace.Icon"/>
+    </ImageReferences>
+  </Presentation>
+  <Resources>
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.DatabaseSystem.Icon" FileName="fogDatabaseSystem.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Database System" />
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.Database.Icon" FileName="fogDatabase.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Database" />
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.Server.Icon" FileName="fogServer.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Server " />
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.Listener.Icon" FileName="fogListener.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Listener" />
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.Agent.Icon" FileName="fogAgent.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Agent" />
+    <Image ID="ABC.Database.Oracle.Foglight.DBO.Tablespace.Icon" FileName="fogTablespace.png" Accessibility="Public" HasNullStream="false" Comment="Foglight Oracle Tablespace" />
+  </Resources>
+</ManagementPackFragment>

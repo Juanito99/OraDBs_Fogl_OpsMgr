@@ -72,6 +72,9 @@
     <Compile Include="Service Model\Presentation\Folders.mpx">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Service Model\Presentation\Icons.mpx">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Service Model\Presentation\Views.mptg.mpx">
       <SubType>Code</SubType>
       <DependentUpon>Service Model\Presentation\Views.mptg</DependentUpon>
@@ -83,6 +86,7 @@
     <Folder Include="Service Model\Classes" />
     <Folder Include="Service Model\Discoveries" />
     <Folder Include="Service Model\Presentation" />
+    <Folder Include="Service Model\Presentation\Icons" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Health Model\MonitorDBOAdv.vbs" />
@@ -98,6 +102,24 @@
       <SubType>Content</SubType>
       <Generator>FragmentGenerator</Generator>
     </Content>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogAgent.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogDatabase.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogDatabaseSystem.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogListener.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogServer.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Service Model\Presentation\Icons\fogTablespace.png">
+      <SubType>Content</SubType>
+    </EmbeddedResource>
     <Content Include="Service Model\Presentation\Views.mptg">
       <SubType>Content</SubType>
       <Generator>FragmentGenerator</Generator>
