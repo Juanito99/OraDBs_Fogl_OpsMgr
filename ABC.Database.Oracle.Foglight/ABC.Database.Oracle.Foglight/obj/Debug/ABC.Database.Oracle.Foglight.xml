@@ -3,7 +3,7 @@
   <Manifest>
     <Identity>
       <ID>ABC.Database.Oracle.Foglight</ID>
-      <Version>1.0.0.7</Version>
+      <Version>1.0.0.8</Version>
     </Identity>
     <Name>ABC.Database.Oracle.Foglight</Name>
     <References>
